@@ -1,0 +1,100 @@
+package com.Baseclass;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.ClickAction;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Baseclass {
+	
+	public static WebDriver driver;
+	
+	@SuppressWarnings("unused")
+	private WebDriver browserlaunch(String type) {
+    	
+		if (type.equalsIgnoreCase("chrome")) {
+			
+			WebDriverManager.chromedriver().setup();
+			
+			 driver = new ChromeDriver();
+			
+		}
+		else if (type.equalsIgnoreCase("firefox")) {
+			
+			WebDriverManager.firefoxdriver().setup();
+			
+			 driver = new FirefoxDriver();
+			
+		}
+		driver.manage().window().maximize();
+		return driver;
+	}
+    @SuppressWarnings("unused")
+	private void getUrl(String url) {
+    	driver.get(url);
+	}
+    @SuppressWarnings("unused")
+	private void navigation(String Newurl) {
+    	
+		driver.navigate().to(Newurl);
+		driver.navigate().back();
+		driver.navigate().forward();
+		driver.navigate().refresh();
+    }
+    @SuppressWarnings("unused")
+	private void alert(String type, String value) {
+    	Alert alert = driver.switchTo().alert();
+    	if (type.equalsIgnoreCase("ok")) {
+    		alert.accept();
+			}
+    	else if (type.equalsIgnoreCase("cancel")) {
+    		alert.dismiss();
+			}
+    	else if (type.equalsIgnoreCase("sendkeys")) {
+    		alert.sendKeys("name");
+			}
+    	else if (type.equalsIgnoreCase("gettext")) {
+    		alert.getText();
+		    }
+	}
+    @SuppressWarnings("unused")
+	private void actions(WebElement elementA,WebElement elementB, String type) {
+    	Actions actions = new Actions(driver);
+    	
+    	if (type.equalsIgnoreCase("click")) {
+    		actions.click().build().perform();
+    		}
+    	else if (type.equalsIgnoreCase("doubleclick")) {
+    		actions.click().build().perform();
+    		}
+    	else if (type.equalsIgnoreCase("contextclick")) {
+    		actions.click().build().perform();
+			}
+    	else if (type.equalsIgnoreCase("movetoelement")) {
+    		actions.click().build().perform();
+			
+		}
+		
+
+	}
+    
+  
+	
+
+	}
+    
+    
+	
+    
+		
+
+	
+
+
